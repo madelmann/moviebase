@@ -1,0 +1,71 @@
+[Section: general]
+
+############################
+### GENERAL TRANSLATIONS ###
+############################
+
+APP_VERSION: Current version
+EMAIL: Email
+HOME: Home
+LOGIN_FAILED: Error during login.
+PASSWORD: Password
+PLCEHLDR_MAIL: email@address.com
+RESET_PASSWORD: Reset password
+SHOW_ACTORS: Actors
+SHOW_ADMIN: Admin
+SHOW_ADVANCEDSEARCH: Search
+SHOW_COLLECTIONS: Collections
+SHOW_DOWNLOADS: Downloads
+TITLE: MOVIEBASE
+UPDATE: Save changes
+UPDATE_SUCCESS: Changes saved
+USER: User
+USER_FEEDBACK: User feedback
+
+############################
+### STATUS & ENUM VALUES ###
+############################
+
+
+###########################
+### PLUGIN TRANSLATIONS ###
+###########################
+
+[Section: header]
+LOGIN: Log in
+SETTINGS: Settings
+
+[Section: loginView]
+DO_IT_NOW: Get started now!
+FORGOT_YOUR_PASSWORD: Forgot your password?
+NOT_YET_REGISTERED: Not registered yet?
+PLEASE_SIGN_IN: Please log in
+SIGN_IN: Log in
+STAY_LOGGED_IN: Stay logged in
+
+[Section: registerView]
+REGISTER: Create user account
+REGISTRATION_ERROR: Error creating your user account.
+REGISTRATION_SUCCESS: Registration successful! We will email you the login data.
+
+[Section: resetPasswordView]
+RESET_PASSWORD_ERROR: An error occurred while resetting your password.
+RESET_PASSWORD_SUCCESS: Your password has been reset. We will email you a new password for login. Then you can choose a new password in Settings.
+
+[Section: settingsView]
+ACCOUNT_DELETE_CONFIRMATION: Do you really want to delete your account? This cannot be reverted.
+CHANGE_PASSWORD: Change password
+CHANGE_PASSWORD_SUCCESS: Password changed.
+DELETE_ACCOUNT: Delete user account
+FIRST_NAME: First name
+INVALID_PASS: Please enter a valid password.
+LANGUAGE_SELECTION: Language selection
+LAST_NAME: Last name
+LOGOUT: Logout
+PASSWORD_MISSMATCH: Passwords don't match.
+PW_EXPLAIN: If you want to change your password, enter the new password twice.
+RECEIVE_LOGIN_NOTIFICATIONS: Notifications at login
+RECEIVE_MAIL_NOTIFICATIONS: Email notifications
+USE_PRO_UI: Professional view
+USER_PROFILE: User profile
+VERIFY_PASSWORD: Repeat password

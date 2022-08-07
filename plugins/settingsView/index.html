@@ -1,0 +1,86 @@
+<div class='container'>
+	<div class="form-row g-3">
+		<form class='needs-validation' id='frmUserSettings' onsubmit='event.preventDefault();' novalidate>
+		<div class='row g-2'>
+			<h4 class='mb-3 translation' token='USER'>User</h4>
+			<div class='col-sm-12'>
+				<label for='email' class='form-label translation' token='EMAIL'>EMAIL<span class='text-muted'></span></label>
+				<input type='text' id='email' class='form-control' disabled />
+			</div>
+			<div class='col-sm-6'>
+				<label for='firstName' class='form-label translation' token='FIRST_NAME'>FIRST_NAME</label>
+				<input type='text' id='firstname' class='form-control translation-placeholder' token='FIRST_NAME' />
+			</div>
+			<div class='col-sm-6'>
+				<label for='lastName' class='form-label translation' token='LAST_NAME'>LAST_NAME</label>
+				<input type='text' id='lastname' class='form-control translation-placeholder' token='LAST_NAME' />
+			</div>
+			<div class='col-sm-6'>
+				<label for='language_selection' class='form-label translation' token='LANGUAGE_SELECTION'>LANGUAGE_SELECTION</label>
+				<select id='language_selection' class='form-select'>
+					<option value='DEV'>DEVELOPMENT</option>
+				</select>
+			</div>
+			<div class='col-sm-6'>
+				<label for='user_profile' class='form-label translation' token='USER_PROFILE'>USER_PROFILE</label>
+				<input type='text' id='user_profile' class='form-control' disabled />
+			</div>
+			<div class='col-sm-6'></div>
+
+			<hr class='my-4'>
+
+			<div class='col-sm-12 form-switch'>
+				<input type='checkbox' class='form-check-input' id='receive_mail_notifications' onchange='mPlugin.UpdateUI();' />
+				<label class='form-check-label translation' for='receive_mail_notifications' token='RECEIVE_MAIL_NOTIFICATIONS'>RECEIVE_MAIL_NOTIFICATIONS</label>
+			</div>
+			<div class='col-sm-12 form-switch'>
+				<input type='checkbox' class='form-check-input' id='receive_login_notifications' onchange='mPlugin.UpdateUI();' />
+				<label class='form-check-label translation' for='receive_login_notifications' token='RECEIVE_LOGIN_NOTIFICATIONS'>RECEIVE_LOGIN_NOTIFICATIONS</label>
+			</div>
+
+			<div class='col-sm-4'><button class='w-100 btn btn-primary translation' onclick='mPlugin.UpdateUser();' token='UPDATE'>UPDATE</button></div>
+			<div class='col-sm-8'></div>
+		</div>
+		</form>
+
+		<hr class='my-4'>
+
+		<form class='needs-validation' id='frmPasswordChange' onsubmit='event.preventDefault();' novalidate>
+			<div class='row g-2'>
+				<h4 class='mb-3 translation' token='CHANGE_PASSWORD'>CHANGE_PASSWORD</h4>
+				<div class='col-sm-6'>
+					<label for='password' class='form-label translation' token='PASSWORD'>PASSWORD</label>
+					<input type='password' id='password' class='form-control translation-placeholder' token='PASSWORD' required />
+					<!--<div class='invalid-feedback translation' token='INVALID_PASS'>Valid first password is required.</div>-->
+				</div>
+				<div class='col-sm-6'>
+					<label for='password2' class='form-label translation' token='VERIFY_PASSWORD'>VERIFY_PASSWORD</label>
+					<input type='password' id='password2' class='form-control  translation-placeholder' token='VERIFY_PASSWORD' required />
+				</div>
+				<small id="passwordHelpBlock" class="form-text text-muted translation" token='PW_EXPLAIN'>
+					Password explaination
+				</small>
+
+				<div class='col-sm-12' id='login_message'></div>
+
+				<div class='col-sm-4'><button class='w-100 btn btn-primary translation' onclick='mPlugin.UpdatePassword();' token='CHANGE_PASSWORD'>UPDATE_PASSWORD</button></div>
+				<div class='col-sm-8'></div>
+			</div>
+		</form>
+
+		<hr class='my-4'>
+
+		<div class='row g-2' style='margin-top: 20px'>
+			<div class='col-sm-4'><button class='w-100 btn btn-warning translation' style='float: right' onclick='mPlugin.Logout();' token='LOGOUT'>LOGOUT</button></div>
+			<div class='col-sm-4'></div>
+		</div>
+		<div class='row g-2' style='margin-top: 20px'>
+			<div class='col-sm-4'><button class='w-100 btn btn-danger translation' style='float: right' onclick='mPlugin.DeleteAccount();' token='DELETE_ACCOUNT'>DELETE_ACCOUNT</button></div>
+			<div class='col-sm-4'></div>
+		</div>
+
+		<div id="app_version" style="position: absolute; bottom: 10px;">
+			<span><label class="translation" token="APP_VERSION"></label><p>v{{APP_VERSION}}</p></span>
+		</div>
+	</div>
+</div>

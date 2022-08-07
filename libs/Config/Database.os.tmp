@@ -1,0 +1,13 @@
+
+public namespace Config {
+	public namespace Database {
+
+		public string Database const = "<database schema>";
+		public string Host const = "<hostname>";
+		public string Password const = "<password>";
+		public int Port const = 3306;
+		public string User const = "<user>";
+
+	}
+}
+

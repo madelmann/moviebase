@@ -1,0 +1,18 @@
+[Section: general]
+
+############################
+### GENERAL TRANSLATIONS ###
+############################
+
+TITLE: MOVIEBASE - DEVELOPMENT SYSTEM
+
+
+############################
+### STATUS & ENUM VALUES ###
+############################
+
+
+###########################
+### PLUGIN TRANSLATIONS ###
+###########################
+

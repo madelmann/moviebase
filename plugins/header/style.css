@@ -1,0 +1,17 @@
+#login_label {
+    color: white;
+}
+#login_label:hover {
+    color: #0a58ca;
+}
+
+#settings_label {
+    color: white;
+}
+#settings_label:hover {
+    color: #0a58ca;
+}
+
+.menu_item {
+    color: white;
+}

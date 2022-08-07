@@ -1,0 +1,60 @@
+
+label:hover {
+	border: 1px solid orange;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.cancel {
+	padding: 5px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.icon {
+    /*border: 2px solid orange;*/
+    border-radius: 6px;
+    display: block;
+    float: left;
+    height: 32px;
+    margin-left: 0.2em;
+    z-index: 5;
+}
+
+.image1 {
+	max-width: 200px;
+}
+
+.input {
+	font-size: 12px;
+	padding: 5px;
+	width: 100%;
+}
+
+.textarea {
+	font-size: 10px;
+	height: 100px;
+	padding: 5px;
+	width: 100%;
+}
+
+.video {
+	/* border: 1px solid black; */
+	background-color: black;
+	border-radius: 4px;
+	margin: auto;
+	outline: none;
+	width: 100%;
+}
+
+#image-preview {
+	max-width: 200px;
+}
+
+#vote {
+	left: 20px;
+	position: absolute;
+	top: 20px;
+}
+

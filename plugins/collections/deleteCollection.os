@@ -1,0 +1,1 @@
+../admin/deleteCollection.os

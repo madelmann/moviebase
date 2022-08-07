@@ -1,0 +1,1 @@
+{ "Database": "moviebase", "Host": "127.0.0.1", "Output": "moviebase", "Password": "admin*", "Port": 3306, "User": "moviebase" }

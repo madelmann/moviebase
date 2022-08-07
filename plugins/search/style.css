@@ -1,0 +1,79 @@
+
+X {
+}
+X:hover {
+	color: red;
+}
+
+.cancel {
+	padding: 5px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.input {
+	font-size: 12pt;
+	padding: 5px;
+	width: 300px;
+}
+
+.selected {
+	background-color: darkgreen!important;
+	border: 3px solid orange!important;
+	border-radius: 8px;
+}
+
+/* The sidebar menu */
+.sidenav {
+	cursor: default;
+	display: grid;
+	float: left;
+	left: 0;
+	margin-right: 30px;
+	overflow-x: auto;
+	top: 0;
+	width: 160px;
+	z-index: 1;
+}
+
+/* The navigation menu links */
+.sidenav a {
+	background-color: darkgreen;
+	border: 3px solid darkgreen;
+	border-radius: 8px;
+	color: white;
+	margin: 1px;
+	min-width: 100px;
+	text-align: center;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+	background-color: darkgreen!important;
+	border: 3px solid orange;
+	border-radius: 8px;
+	margin: 1px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.sidenav {
+		padding-top: 15px;
+		width: 120px;
+	}
+	.sidenav a {
+		font-size: 16px;
+	}
+}
+

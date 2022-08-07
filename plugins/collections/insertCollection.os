@@ -1,0 +1,1 @@
+../admin/insertCollection.os

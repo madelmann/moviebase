@@ -1,0 +1,39 @@
+
+<div id="Statusbar" style="display: block;">
+	<span id="search-area">
+		<input id="query" type="text" />
+		<button type="submit" class="translations" token="SEARCH" onclick="SearchVideos();">SEARCH</button>
+	</span>
+
+	<label id="login_label" class="menu_item translation" token="LOGIN" onclick="Header.Login();">LOGIN</label>
+	<label id="settings_label" class="menu_item translation hidden" token="SETTINGS" onclick="Header.Settings();">SETTINGS</label>
+
+	<ul class="nav justify-content-center">
+		<li class="nav-item">
+		  <a class="nav-link menu_item translation" token="HOME" onclick="Header.ShowHome();">HOME</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation" token="SHOW_COLLECTIONS" onclick="Header.ShowCollections();">SHOW_COLLECTIONS</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation" token="SHOW_ADVANCEDSEARCH" onclick="Header.ShowAdvancedSearch();">SHOW_ADVANCEDSEARCH</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation" token="SHOW_ACTORS" onclick="Header.ShowActors();">SHOW_ACTORS</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation admin_hidden" token="SHOW_DOWNLOADS" onclick="Header.ShowDownloads();">SHOW_DOWNLOADS</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation admin_hidden" token="SHOW_ADMIN" onclick="Header.ShowAdmin();">SHOW_ADMIN</a>
+		</li>
+	<!--
+		<li class="nav-item">
+			<a class="nav-link menu_item translation admin_hidden" token="SHOW_TAGS" onclick="Header.ShowTags();">SHOW_TAGS</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link menu_item translation admin_hidden" token="SHOW_VIDEOS" onclick="Header.ShowVideos();">SHOW_VIDEOS</a>
+		</li>
+	-->
+	</ul>
+</div>

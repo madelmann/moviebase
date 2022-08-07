@@ -1,0 +1,47 @@
+
+label:hover {
+	border: 1px solid orange;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+X {
+}
+X:hover {
+	color: red;
+}
+
+.cancel {
+	padding: 5px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.collection {
+	background-color: green;
+	border: 2px solid green;
+    border-radius: 6px;
+    color: white;
+    display: inline-block;
+    margin: 1px;
+    min-width: 120px;
+    padding: 1px;
+    text-align: center;
+}
+.collection:hover {
+	background-color: green;
+	border: 2px solid orange;
+	border-radius: 6px;
+	color: white;
+	display: inline-block;
+	padding: 1px;
+	text-align: center;
+}
+
+.input {
+	font-size: 12pt;
+	padding: 5px;
+	width: 720px;
+}
+
