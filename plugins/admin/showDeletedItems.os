@@ -1,13 +1,13 @@
 
 private void showDeletedFiles() throws {
-	string query = "SELECT * FROM items WHERE deleted = TRUE";
+	var query = "SELECT * FROM items WHERE deleted = TRUE";
 
-	int error = mysql_query(Database.Handle, query);
+	var error = mysql_query(Database.Handle, query);
 	if ( error ) {
 		throw mysql_error(Database.Handle);
 	}
 
-	int result = mysql_store_result(Database.Handle);
+	var result = mysql_store_result(Database.Handle);
 
 	print("<h4>Deleted items:</h4>");
 	print("<table>");

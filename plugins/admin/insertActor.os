@@ -12,7 +12,7 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 	
-		string name = mysql_real_escape_string(Database.Handle, get("name"));
+		var name = mysql_real_escape_string(Database.Handle, get("name"));
 		if ( !name ) {
 			return false;
 		}
@@ -25,9 +25,9 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 
-		string query = "INSERT INTO actors (name) VALUES ('" + name + "')";
+		var query = "INSERT INTO actors (name) VALUES ('" + name + "')";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}

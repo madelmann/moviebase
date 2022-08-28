@@ -12,7 +12,7 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 	
-		string id = mysql_real_escape_string(Database.Handle, get("id"));
+		var id = mysql_real_escape_string(Database.Handle, get("id"));
 	
 		return DeleteTag(id);
 	}
@@ -22,9 +22,9 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 
-		string query = "DELETE FROM tags WHERE id = " + id;
+		var query = "DELETE FROM tags WHERE id = " + id;
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}

@@ -15,8 +15,8 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 
-		string collectionID = mysql_real_escape_string( Database.Handle, get( "collectionID" ) );
-		string itemID = mysql_real_escape_string( Database.Handle, get( "itemID" ) );
+		var collectionID = mysql_real_escape_string( Database.Handle, get( "collectionID" ) );
+		var itemID = mysql_real_escape_string( Database.Handle, get( "itemID" ) );
 
 		Json.AddElement( "id", itemID );
 
@@ -24,9 +24,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool AddCollectionItem( string collectionID, string itemID ) throws {
-		string query = "INSERT INTO collection_items (collection_id, item_id) VALUES (" + collectionID + ", " + itemID + ")";
+		var query = "INSERT INTO collection_items (collection_id, item_id) VALUES (" + collectionID + ", " + itemID + ")";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}

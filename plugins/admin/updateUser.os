@@ -26,9 +26,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool SetPrename(string identifier, string value) throws {
-		string query = "UPDATE " + TABLE + " SET prename = '" + value + "' WHERE identifier = '" + identifier + "'";
+		var query = "UPDATE " + TABLE + " SET prename = '" + value + "' WHERE identifier = '" + identifier + "'";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}
@@ -37,9 +37,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool SetSurname(string identifier, string value) throws {
-		string query = "UPDATE " + TABLE + " SET surname = '" + value + "' WHERE identifier = '" + identifier + "'";
+		var query = "UPDATE " + TABLE + " SET surname = '" + value + "' WHERE identifier = '" + identifier + "'";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}
@@ -48,9 +48,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool UpdateUser(string identifier, string prename, string surname) throws {
-		string query = "UPDATE " + TABLE + " SET prename = '" + prename + "', surname = '" + surname + "' WHERE identifier = '" + identifier + "'";
+		var query = "UPDATE " + TABLE + " SET prename = '" + prename + "', surname = '" + surname + "' WHERE identifier = '" + identifier + "'";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}

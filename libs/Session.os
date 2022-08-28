@@ -104,8 +104,8 @@ public object Session {
 	public bool store() modify throws {
 		mId = fetchId();
 
-		var query = "INSERT INTO sessions( id, identifier, expires ) " 
-				  + "VALUES ( '" + mId + "', '" + mUserIdentifier + "', " + ( mIsInfinite ? "0" : "( NOW() + INTERVAL " + DEFAULT_SESSION_LENGTH + " MINUTE )" ) + " )";
+		var query = "INSERT INTO sessions ( id, identifier, expires )
+					 VALUES ( '" + mId + "', '" + mUserIdentifier + "', " + ( mIsInfinite ? "0" : "( NOW() + INTERVAL " + DEFAULT_SESSION_LENGTH + " MINUTE )" ) + " )";
 
 		var error = mysql_query( Database.Handle, query );
 		if ( error ) {

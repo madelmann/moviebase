@@ -42,7 +42,7 @@ private namespace Database {
 	public void begin() throws {
 		string query = "begin";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
@@ -51,7 +51,7 @@ private namespace Database {
 	public void commit() throws {
 		string query = "commit";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
@@ -60,7 +60,7 @@ private namespace Database {
 	public void rollback() throws {
 		string query = "rollback";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}

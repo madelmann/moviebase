@@ -47,9 +47,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool SetRating( string id, string value ) throws {
-		string query = "UPDATE items SET rating_count = rating_count + 1, rating_value = rating_value + " + value + " WHERE id = " + id;
+		var query = "UPDATE items SET rating_count = rating_count + 1, rating_value = rating_value + " + value + " WHERE id = " + id;
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
