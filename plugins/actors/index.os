@@ -55,14 +55,14 @@ public object RenderPlugin implements IRenderPlugin {
 
 		//#ORDER BY cnt DESC, name ASC";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
 
 		print( "<ul>" );
 
-		int result = mysql_store_result( Database.Handle );
+		var result = mysql_store_result( Database.Handle );
 		while ( mysql_fetch_row( result ) ) {
 			ShowActor( result );
 		}

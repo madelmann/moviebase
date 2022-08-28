@@ -12,7 +12,7 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 	
-		string id = mysql_real_escape_string(Database.Handle, get("id"));
+		var id = mysql_real_escape_string(Database.Handle, get("id"));
 	
 		return DeleteCollection(id);
 	}
@@ -24,9 +24,9 @@ public object ExecutePlugin implements IExecutePlugin {
 
 		// Delete items that belong to that collection
 		{
-			string query = "DELETE FROM collection_items WHERE collection_id = " + id;
+			var query = "DELETE FROM collection_items WHERE collection_id = " + id;
 
-			int error = mysql_query(Database.Handle, query);
+			var error = mysql_query(Database.Handle, query);
 			if ( error ) {
 				throw mysql_error(Database.Handle);
 			}
@@ -34,9 +34,9 @@ public object ExecutePlugin implements IExecutePlugin {
 
 		// Delete the collection itself
 		{
-			string query = "DELETE FROM collections WHERE id = " + id;
+			var query = "DELETE FROM collections WHERE id = " + id;
 
-			int error = mysql_query(Database.Handle, query);
+			var error = mysql_query(Database.Handle, query);
 			if ( error ) {
 				throw mysql_error(Database.Handle);
 			}

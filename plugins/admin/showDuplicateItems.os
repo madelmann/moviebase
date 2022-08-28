@@ -1,13 +1,13 @@
 
 private void showDuplicateItems() throws {
-	string query = "SELECT itm1.* FROM items itm1 JOIN items itm2 ON (itm1.md5sum = itm2.md5sum AND itm1.id != itm2.id) ORDER BY itm1.md5sum ASC";
+	var query = "SELECT itm1.* FROM items itm1 JOIN items itm2 ON (itm1.md5sum = itm2.md5sum AND itm1.id != itm2.id) ORDER BY itm1.md5sum ASC";
 
-	int error = mysql_query(Database.Handle, query);
+	var error = mysql_query(Database.Handle, query);
 	if ( error ) {
 		throw mysql_error(Database.Handle);
 	}
 
-	int result = mysql_store_result(Database.Handle);
+	var result = mysql_store_result(Database.Handle);
 
 	print("<h4>Duplicate items:</h4>");
 	print("<table>");

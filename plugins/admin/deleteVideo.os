@@ -12,7 +12,7 @@ public object ExecutePlugin implements IExecutePlugin {
 			throw "itemID is missing!";
 		}
 	
-		string itemID = mysql_real_escape_string( Database.Handle, get( "itemID" ) );
+		var itemID = mysql_real_escape_string( Database.Handle, get( "itemID" ) );
 		if ( !itemID ) {
 			throw "invalid itemID provided!";
 		}
@@ -23,9 +23,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool DeleteVideo( string itemID ) throws {
-		string query = "DELETE FROM items WHERE id = " + itemID;
+		var query = "DELETE FROM items WHERE id = " + itemID;
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}

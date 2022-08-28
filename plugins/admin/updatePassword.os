@@ -30,9 +30,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool UpdatePassword(string identifier, string password) throws {
-		string query = "UPDATE users SET password = " + Utils.prepareEncrypt(password) + " WHERE identifier = '" + identifier + "'";
+		var query = "UPDATE users SET password = " + Utils.prepareEncrypt(password) + " WHERE identifier = '" + identifier + "'";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}

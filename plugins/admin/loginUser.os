@@ -27,10 +27,7 @@ public object ExecutePlugin {
 			return false;
 		}
 
-		bool stayLoggedIn;
-		if ( isSet( "stayLoggedIn" ) ) {
-			stayLoggedIn = cast<bool>( get( "stayLoggedIn" ) );
-		}
+		var stayLoggedIn = API.retrieve( "stayLoggedIn", false );
 
 		return Accounts.Login( username, password, stayLoggedIn );
 	}

@@ -12,7 +12,7 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 	
-		string imageId = mysql_real_escape_string(Database.Handle, get("image"));
+		var imageId = mysql_real_escape_string(Database.Handle, get("image"));
 	
 		Json.AddElement("action", "delete");
 		Json.AddElement("id", string imageId);
@@ -21,9 +21,9 @@ public object ExecutePlugin implements IExecutePlugin {
 	}
 
 	private bool DeleteImage(string id) throws {
-		string query = "DELETE FROM images WHERE id = " + id;
+		var query = "DELETE FROM images WHERE id = " + id;
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}

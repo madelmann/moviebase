@@ -63,7 +63,7 @@ public object ExecutePlugin implements IExecutePlugin {
 						WHERE ci.item_id = " + id + " AND (c.is_public = 1 OR c.identifier = '" + mIdentifier + "') \
 						ORDER BY c.name ASC";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}

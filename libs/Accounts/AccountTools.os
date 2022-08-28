@@ -34,12 +34,12 @@ public namespace Accounts {
 				  + "FROM users u "
 				  + "WHERE username = '" + username + "' AND password = SHA2( '" + password + "', 256 )";
 
-		var result = Database.Query( query );
+		Database.Query( query );
 
-		if ( mysql_fetch_row( result ) ) {
-			var identifier	= mysql_get_field_value( result, "identifier" );
-			var language	= "EN"; //mysql_get_field_value( result, "language" );
-			var username	= mysql_get_field_value( result, "username" );
+		if ( Database.FetchRow() ) {
+			var identifier	= Database.GetFieldValue( "identifier" );
+			var language	= "EN"; //Database.GetFieldValue( "language" );
+			var username	= Database.GetFieldValue( "username" );
 
 			Database.begin();
 

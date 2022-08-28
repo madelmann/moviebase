@@ -28,9 +28,9 @@ public object ExecutePlugin implements IExecutePlugin {
 			return false;
 		}
 
-		string query = "INSERT INTO images (image, title) VALUES ('" + image + "', '" + title + "')";
+		var query = "INSERT INTO images (image, title) VALUES ('" + image + "', '" + title + "')";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}
