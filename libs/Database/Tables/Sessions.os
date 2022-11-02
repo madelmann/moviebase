@@ -6,7 +6,6 @@ public object TSessionsRecord {
 	public string Expires;
 	public string Id;
 	public string Identifier;
-	public string IpAddress;
 	public int IsAdmin;
 
 	public void Constructor( int databaseHandle ) {
@@ -35,7 +34,7 @@ public object TSessionsRecord {
 	}
 
 	public void insert() modify throws {
-		var query = "INSERT INTO sessions ( `created`, `expires`, `id`, `identifier`, `ip_address`, `is_admin` ) VALUES ( NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IpAddress + "', '" + IsAdmin + "' )";
+		var query = "INSERT INTO sessions ( `created`, `expires`, `id`, `identifier`, `is_admin` ) VALUES ( NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IsAdmin + "' )";
 
 		var error = mysql_query( DB, query );
 		if ( error ) {
@@ -44,7 +43,7 @@ public object TSessionsRecord {
 	}
 
 	public void insertOrUpdate() modify throws {
-		var query = "INSERT INTO sessions ( `created`, `expires`, `id`, `identifier`, `ip_address`, `is_admin` ) VALUES ( NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IpAddress + "', '" + IsAdmin + "' ) ON DUPLICATE KEY UPDATE `created` = NULLIF('" + Created + "', ''), `expires` = NULLIF('" + Expires + "', ''), `identifier` = '" + Identifier + "', `ip_address` = '" + IpAddress + "', `is_admin` = '" + IsAdmin + "'";
+		var query = "INSERT INTO sessions ( `created`, `expires`, `id`, `identifier`, `is_admin` ) VALUES ( NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IsAdmin + "' ) ON DUPLICATE KEY UPDATE `created` = NULLIF('" + Created + "', ''), `expires` = NULLIF('" + Expires + "', ''), `identifier` = '" + Identifier + "', `is_admin` = '" + IsAdmin + "'";
 
 		var error = mysql_query( DB, query );
 		if ( error ) {
@@ -67,7 +66,6 @@ public object TSessionsRecord {
 		Expires = cast<string>( mysql_get_field_value( result, "expires" ) );
 		Id = cast<string>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
-		IpAddress = cast<string>( mysql_get_field_value( result, "ip_address" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
 	}
 
@@ -88,7 +86,6 @@ public object TSessionsRecord {
 		Expires = cast<string>( mysql_get_field_value( result, "expires" ) );
 		Id = cast<string>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
-		IpAddress = cast<string>( mysql_get_field_value( result, "ip_address" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
 	}
 
@@ -97,7 +94,6 @@ public object TSessionsRecord {
 		Expires = cast<string>( mysql_get_field_value( result, "expires" ) );
 		Id = cast<string>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
-		IpAddress = cast<string>( mysql_get_field_value( result, "ip_address" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
 	}
 
@@ -110,7 +106,7 @@ public object TSessionsRecord {
 	}
 
 	public string =operator( string ) const {
-		return "TSessionsRecord { NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IpAddress + "', '" + IsAdmin + "' }";
+		return "TSessionsRecord { NULLIF('" + Created + "', ''), NULLIF('" + Expires + "', ''), '" + Id + "', '" + Identifier + "', '" + IsAdmin + "' }";
 	}
 
 	private int DB const;

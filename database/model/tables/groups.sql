@@ -1,9 +1,5 @@
--- auto-generated definition
-create table `groups`
-(
-    id   int auto_increment
-        primary key,
-    name varchar(255) not null
-);
-
-
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

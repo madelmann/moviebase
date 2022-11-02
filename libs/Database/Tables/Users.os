@@ -2,11 +2,9 @@
 import System.Collections.Vector;
 
 public object TUsersRecord {
-	public int Deleted;
 	public int Id;
 	public string Identifier;
 	public int IsAdmin;
-	public string Language;
 	public string LastModified;
 	public string Password;
 	public string Prename;
@@ -39,7 +37,7 @@ public object TUsersRecord {
 	}
 
 	public void insert() modify throws {
-		var query = "INSERT INTO users ( `deleted`, `id`, `identifier`, `is_admin`, `language`, `last_modified`, `password`, `prename`, `surname`, `username` ) VALUES ( '" + Deleted + "', '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', '" + Language + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' )";
+		var query = "INSERT INTO users ( `id`, `identifier`, `is_admin`, `last_modified`, `password`, `prename`, `surname`, `username` ) VALUES ( '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' )";
 
 		var error = mysql_query( DB, query );
 		if ( error ) {
@@ -48,7 +46,7 @@ public object TUsersRecord {
 	}
 
 	public void insertOrUpdate() modify throws {
-		var query = "INSERT INTO users ( `deleted`, `id`, `identifier`, `is_admin`, `language`, `last_modified`, `password`, `prename`, `surname`, `username` ) VALUES ( '" + Deleted + "', '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', '" + Language + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' ) ON DUPLICATE KEY UPDATE `deleted` = '" + Deleted + "', `identifier` = '" + Identifier + "', `is_admin` = '" + IsAdmin + "', `language` = '" + Language + "', `last_modified` = NULLIF('" + LastModified + "', ''), `password` = '" + Password + "', `prename` = '" + Prename + "', `surname` = '" + Surname + "', `username` = '" + Username + "'";
+		var query = "INSERT INTO users ( `id`, `identifier`, `is_admin`, `last_modified`, `password`, `prename`, `surname`, `username` ) VALUES ( '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' ) ON DUPLICATE KEY UPDATE `identifier` = '" + Identifier + "', `is_admin` = '" + IsAdmin + "', `last_modified` = NULLIF('" + LastModified + "', ''), `password` = '" + Password + "', `prename` = '" + Prename + "', `surname` = '" + Surname + "', `username` = '" + Username + "'";
 
 		var error = mysql_query( DB, query );
 		if ( error ) {
@@ -67,11 +65,9 @@ public object TUsersRecord {
 			throw "no result found";
 		}
 
-		Deleted = cast<int>( mysql_get_field_value( result, "deleted" ) );
 		Id = cast<int>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
-		Language = cast<string>( mysql_get_field_value( result, "language" ) );
 		LastModified = cast<string>( mysql_get_field_value( result, "last_modified" ) );
 		Password = cast<string>( mysql_get_field_value( result, "password" ) );
 		Prename = cast<string>( mysql_get_field_value( result, "prename" ) );
@@ -92,11 +88,9 @@ public object TUsersRecord {
 			throw "no result found";
 		}
 
-		Deleted = cast<int>( mysql_get_field_value( result, "deleted" ) );
 		Id = cast<int>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
-		Language = cast<string>( mysql_get_field_value( result, "language" ) );
 		LastModified = cast<string>( mysql_get_field_value( result, "last_modified" ) );
 		Password = cast<string>( mysql_get_field_value( result, "password" ) );
 		Prename = cast<string>( mysql_get_field_value( result, "prename" ) );
@@ -105,11 +99,9 @@ public object TUsersRecord {
 	}
 
 	public void loadByResult( int result ) modify {
-		Deleted = cast<int>( mysql_get_field_value( result, "deleted" ) );
 		Id = cast<int>( mysql_get_field_value( result, "id" ) );
 		Identifier = cast<string>( mysql_get_field_value( result, "identifier" ) );
 		IsAdmin = cast<int>( mysql_get_field_value( result, "is_admin" ) );
-		Language = cast<string>( mysql_get_field_value( result, "language" ) );
 		LastModified = cast<string>( mysql_get_field_value( result, "last_modified" ) );
 		Password = cast<string>( mysql_get_field_value( result, "password" ) );
 		Prename = cast<string>( mysql_get_field_value( result, "prename" ) );
@@ -126,7 +118,7 @@ public object TUsersRecord {
 	}
 
 	public string =operator( string ) const {
-		return "TUsersRecord { '" + Deleted + "', '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', '" + Language + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' }";
+		return "TUsersRecord { '" + Id + "', '" + Identifier + "', '" + IsAdmin + "', NULLIF('" + LastModified + "', ''), '" + Password + "', '" + Prename + "', '" + Surname + "', '" + Username + "' }";
 	}
 
 	private int DB const;

@@ -12,7 +12,7 @@ private void ShowCollectionItem( string collectionID, string collectionItemID, s
 	print( "
 	<div class='gallery-item'>
 		<div class='gallery-item-preview'>
-			<image src='resources/thumbs/" + imageSrc + "' class='preview' onclick='mPlugin.ShowCollectionItem(" + collectionID + ", " + collectionItemID + ");'/>
+			<image src='resources/thumbs/" + imageSrc + "' class='preview' alt='Image not found' onerror='this.onerror=null;this.src=\"resources/thumbs/" + imageSrc + ".png\";' onclick='mPlugin.ShowCollectionItem(" + collectionID + ", " + collectionItemID + ");'/>
 		</div>
 		" + (addToFavorites ? "<div class='gallery-item-add-to-playlist' onclick='AddItemToFavorites(" + id + ");'>+</div>" : "") + "
 		<label class='gallery-item-title shown' onclick='mPlugin.ShowCollectionItem(" + collectionID + ", " + collectionItemID + ");'>" + title + "</label>
@@ -26,7 +26,7 @@ private void ShowCollectionItem( string collectionID, string collectionItemID, s
 private void ShowPlaylistItem( string id, string imageSrc, string title, bool addToFavorites = false ) {
 	print( "
 	<div class='playlist-item'>
-		<image src='resources/thumbs/" + imageSrc + "' class='playlist-preview' onclick='mPlaylistPlugin.ShowCollectionItem(" + id + ");'/>
+		<image src='resources/thumbs/" + imageSrc + "' class='playlist-preview' onerror='this.onerror=null;this.src=\"resources/thumbs/" + imageSrc + ".png\";' onclick='mPlaylistPlugin.ShowCollectionItem(" + id + ");'/>
 		" + (addToFavorites ? "<div class='playlist-item-add-to-playlist' onclick='AddItemToFavorites(" + id + ");'>+</div>" : "") + "
 		<label class='playlist-item-title shown' onclick='mPlugin.ShowCollectionItem(" + id + ");'>" + title + "</label>
 	</div>
@@ -37,7 +37,7 @@ private void ShowVideoPreview( string id, string imageSrc, string rating, string
 	print( "
 	<div class='gallery-item'>
 		<div class='gallery-item-preview'>
-			<image src='resources/thumbs/" + imageSrc + "' class='preview' onclick='mPlugin.ShowVideo(" + id + ");'/>
+			<image src='resources/thumbs/" + imageSrc + "' class='preview' onerror='this.onerror=null;this.src=\"resources/thumbs/" + imageSrc + ".png\";' onclick='mPlugin.ShowVideo(" + id + ");'/>
 		</div>
 		" + (addToFavorites ? "<div class='gallery-item-add-to-playlist' onclick='AddItemToFavorites(" + id + ");'>+</div>" : "") + "
 		<label class='gallery-item-title shown' onclick='mPlugin.ShowVideo(" + id + ");'>" + title + "</label>

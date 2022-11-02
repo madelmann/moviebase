@@ -133,6 +133,13 @@ public object FileProcessor {
                       + " -o " + mSettings.FilePath + md5sum
                       + " -s " + mSettings.OutputResolution );
 
+		/*
+		system( "thumbnail.sh "
+                      + " '" + filename + "'"
+                      + " " + mSettings.FilePath + md5sum
+                      + " " + mSettings.OutputResolution );
+		*/
+
 		return cast<int>( system( "echo $?" ) );
 	}
 

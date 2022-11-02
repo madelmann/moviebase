@@ -8,7 +8,11 @@ import libs.UI.Controls;
 import Consts;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		string source = SOURCE;
 		string tags = TAGS;

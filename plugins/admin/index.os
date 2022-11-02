@@ -8,10 +8,13 @@ import libs.Utils.VisitorCounter;
 import showDeletedItems;
 import showDuplicateItems;
 
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
 
-public object RenderPlugin implements IRenderPlugin {
 	public void Render() {
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 			print("<h4>Welcome, admin</h4>");
 		}
 
@@ -22,7 +25,7 @@ public object RenderPlugin implements IRenderPlugin {
 		writeln("Visitor count: " + counter.getNumVisitors());
 		writeln("</p>");
 
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 			showDuplicateItems();
 
 			showDeletedFiles();

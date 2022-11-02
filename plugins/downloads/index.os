@@ -7,7 +7,11 @@ import System.StringIterator;
 import libs.Plugins.RenderPlugin;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		pre("
 <h4>Downloads:</h4>
@@ -26,18 +30,17 @@ public object RenderPlugin implements IRenderPlugin {
 	<th>Size</th>
 		");
 
-		//string path = "Download/";
-		string path = "/home/pi/projects/moviebase/resources/downloads/"
+		var path = "resources/downloads/"
 
 		var fileIt = new StringIterator( system( "ls -1 " + path ), LINEBREAK );
 		while ( fileIt.hasNext() ) {
-			string filename = fileIt.next();
+			var filename = fileIt.next();
 
 			if ( !filename ) {
 				continue;
 			}
 
-			string size = system( "du -h '" + path + filename + "' | cut -f -1" );
+			var size = system( "du -h '" + path + filename + "' | cut -f -1" );
 
 			pre("
 <tr>

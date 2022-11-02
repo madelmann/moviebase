@@ -11,8 +11,10 @@ import libs.Plugins.RenderPlugin;
 import libs.UI.Controls;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 	public void Constructor() throws {
+		base.Constructor();
+
 		if ( !isSet( "collectionID" ) ) {
 			return;
 		}
@@ -52,25 +54,25 @@ public object RenderPlugin implements IRenderPlugin {
 		" );
 
 		{ // initialize "rownum" variable
-			string query = "SET @rownum := 0";
+			var query = "SET @rownum := 0";
 
-			int error = mysql_query( Database.Handle, query );
+			var error = mysql_query( Database.Handle, query );
 			if ( error ) {
 				throw mysql_error( Database.Handle );
 			}
 		}
 
-		string query = "SELECT @rownum := (@rownum + 1) AS num, i.actors, i.filename, i.id, @rownum - 1 AS item_id, i.md5sum, i.rating_count, i.rating_value, i.title, i.views "
-						+ "FROM collection_items ci "
-						+ "JOIN items i ON (ci.item_id = i.id) "
-						+ "WHERE ci.collection_id = " + mCollectionID + " AND i.deleted = false ORDER BY ci.id ASC";
+		var query = "SELECT @rownum := (@rownum + 1) AS num, i.actors, i.filename, i.id, @rownum - 1 AS item_id, i.md5sum, i.rating_count, i.rating_value, i.title, i.views "
+				  + "FROM collection_items ci "
+				  + "JOIN items i ON (ci.item_id = i.id) "
+				  + "WHERE ci.collection_id = " + mCollectionID + " AND i.deleted = false ORDER BY ci.id ASC";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
 
-		int result = mysql_store_result( Database.Handle );
+		var result = mysql_store_result( Database.Handle );
 		while ( mysql_fetch_row( result ) ) {
 			string id = mysql_get_field_value( result, "id" );
 			string itemID = mysql_get_field_value( result, "item_id" );

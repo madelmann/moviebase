@@ -1,12 +1,7 @@
--- auto-generated definition
-create table sessions
-(
-    id         varchar(256)                            not null,
-    identifier varchar(80)                             not null,
-    is_admin   int       default 0                     not null,
-    created    timestamp default current_timestamp()   not null on update current_timestamp(),
-    expires    timestamp default '0000-00-00 00:00:00' not null
-)
-    charset = latin1;
-
-
+CREATE TABLE `sessions` (
+  `id` varchar(256) NOT NULL,
+  `identifier` varchar(80) NOT NULL,
+  `is_admin` int(11) NOT NULL DEFAULT 0,
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `expires` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

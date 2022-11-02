@@ -61,6 +61,10 @@ public object ASessionPlugin {
 		" );
 	}
 
+	protected bool isAdmin() const {
+		return mSession && mSession.isAdmin();
+	}
+
 	protected Session mSession;
 }
 

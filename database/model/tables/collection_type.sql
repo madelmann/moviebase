@@ -1,9 +1,5 @@
--- auto-generated definition
-create table collection_type
-(
-    id   int          not null
-        primary key,
-    text varchar(255) null
-);
-
-
+CREATE TABLE `collection_type` (
+  `id` int(11) NOT NULL,
+  `text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

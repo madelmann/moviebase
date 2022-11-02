@@ -107,7 +107,7 @@ public object RenderPlugin implements IPlugin {
 		}
 
 		Query( "SELECT actors, filename, id, md5sum, rating_count, rating_value, tags, title, views FROM items " +
-		       "WHERE deleted = FALSE AND ( is_private = FALSE OR owner = '" + mIdentifier + "' ) " + combinedTags + " ORDER BY TITLE ASC" );
+		       "WHERE deleted = FALSE AND ( is_private = FALSE OR owner = '" + mIdentifier + "' ) " + combinedTags + " ORDER BY added DESC" );
 	}
 
 	private void ShowNoQueryGiven() const {
@@ -117,7 +117,7 @@ public object RenderPlugin implements IPlugin {
 	private void ShowPages() {
 		print( "<div class='pagination3'>" );
 		print( "<ul class='firstPage'>" );
-		
+
 		int numPages = getNumPages();
 		foreach ( int pageNum : 1..numPages ) {	
 			if (
