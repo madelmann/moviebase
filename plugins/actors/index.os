@@ -33,10 +33,10 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		ShowActors();
 	}
 
-	private void ShowActor(int handle) {
-		var count = cast<int>( mysql_get_field_value(Database.Handle, "cnt") );
-		var id = mysql_get_field_value(Database.Handle, "id");
-		var name = mysql_get_field_value(Database.Handle, "name");
+	private void ShowActor(int result) {
+		var count = cast<int>( mysql_get_field_value(result, "cnt") );
+		var id = mysql_get_field_value(result, "id");
+		var name = mysql_get_field_value(result, "name");
 
 		if ( count <= 1 && !mShowAll ) {
 			return;

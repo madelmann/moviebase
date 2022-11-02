@@ -8,7 +8,7 @@ Ihr Browser unterstützt das Video Element nicht
 	");
 }
 
-private void ShowCollectionItem( string collectionID, string collectionItemID, string id, string imageSrc, string rating, string title, string views, bool addToFavorites = false ) {
+private void ShowCollectionItem( string collectionID, int collectionItemID, string id, string imageSrc, string rating, string title, string views, bool addToFavorites = false ) {
 	print( "
 	<div class='gallery-item'>
 		<div class='gallery-item-preview'>

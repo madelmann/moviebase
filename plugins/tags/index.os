@@ -30,9 +30,9 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		ShowTags();
 	}
 
-	private void ShowTag(int handle) {
-		var id = mysql_get_field_value(Database.Handle, "id");
-		var name = mysql_get_field_value(Database.Handle, "name");
+	private void ShowTag(int result) {
+		var id = mysql_get_field_value(result, "id");
+		var name = mysql_get_field_value(result, "name");
 
 		print("<li class='tag'>");
 		print("<span>");

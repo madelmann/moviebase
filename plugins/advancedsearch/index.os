@@ -24,11 +24,11 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		print( "<div id='searchresults'>No tags selected.</div>" );
 	}
 
-	private void ShowTag( int handle ) {
-		var id = mysql_get_field_value( Database.Handle, "id" );
-		var name = mysql_get_field_value( Database.Handle, "name" );
+	private void ShowTag( int result ) {
+		var id = mysql_get_field_value( result, "id" );
+		var name = mysql_get_field_value( result, "name" );
 
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 			print( "<a id='tag_" + name + "' onclick='mPlugin.ToggleTag(\"" + name + "\");'><div class='X' style='float:left' onclick='mPlugin.DeleteTag(" + id + ");'>X</div>" + name + "</a>" );
 		}
 		else {

@@ -31,10 +31,10 @@ public object RenderPlugin implements IRenderPlugin {
 		ShowCollections();
 	}
 
-	private void ShowCollection(int handle) {
-		string id = mysql_get_field_value( Database.Handle, "id" );
-		string name = mysql_get_field_value( Database.Handle, "name" );
-		string owner = mysql_get_field_value( Database.Handle, "identifier" );
+	private void ShowCollection(int result) {
+		var id = mysql_get_field_value( result, "id" );
+		var name = mysql_get_field_value( result, "name" );
+		var owner = mysql_get_field_value( result, "identifier" );
 
 		print("<li class='collection'>");
 		print("<span>");
@@ -47,16 +47,16 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowCollections() throws {
-		string query = "SELECT id, identifier, is_public, name, type FROM collections WHERE is_public = TRUE OR identifier = '" + mIdentifier + "' ORDER BY name ASC";
+		var query = "SELECT id, identifier, is_public, name, type FROM collections WHERE is_public = TRUE OR identifier = '" + mIdentifier + "' ORDER BY name ASC";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}
 
 		print("<ul>");
 
-		int result = mysql_store_result(Database.Handle);
+		var result = mysql_store_result(Database.Handle);
 		while ( mysql_fetch_row(result) ) {
 			ShowCollection(result);
 		}

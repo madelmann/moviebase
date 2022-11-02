@@ -22,13 +22,13 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		ShowVideos( sortBy );
 	}
 
-	public void ShowVideo( int handle ) {
-		string id = mysql_get_field_value( handle, "id" );
-		int rating_count = int mysql_get_field_value( handle, "rating_count" );
-		int rating_value = int mysql_get_field_value( handle, "rating_value" );
-		string tags = mysql_get_field_value( handle, "tags" );
-		string title = mysql_get_field_value( handle, "title" );
-		string views = mysql_get_field_value( handle, "views" );
+	public void ShowVideo( int result ) {
+		var id = mysql_get_field_value( result, "id" );
+		var rating_count = cast<int>( mysql_get_field_value( result, "rating_count" ) );
+		var rating_value = cast<int>( mysql_get_field_value( result, "rating_value" ) );
+		var tags = mysql_get_field_value( result, "tags" );
+		var title = mysql_get_field_value( result, "title" );
+		var views = mysql_get_field_value( result, "views" );
 
 		print( "<tr>" );
 		print( "<td onclick='mPlugin.ShowVideo( " + id + " );'>" + title + "</td>" );
@@ -42,7 +42,7 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 	}
 
 	public void ShowVideos( string sortBy ) throws {
-		string query = "SELECT id, rating_count, rating_value, tags, title, views FROM items WHERE deleted = false";
+		var query = "SELECT id, rating_count, rating_value, tags, title, views FROM items WHERE deleted = false";
 		if ( Utils.mIsLoggedIn ) {
 			query += " AND ( is_private = FALSE OR owner = '" + Utils.mUserIdentifier + "' )";
 		}
@@ -51,12 +51,12 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		}
 		query += " ORDER BY " + sortBy + " ASC";
 
-		int error = mysql_query( Database.Handle, query );
+		var error = mysql_query( Database.Handle, query );
 		if ( error ) {
 			throw mysql_error( Database.Handle );
 		}
 
-		int result = mysql_store_result( Database.Handle );
+		var result = mysql_store_result( Database.Handle );
 		if ( !result ) {
 			throw mysql_error( Database.Handle );
 		}

@@ -91,7 +91,7 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 
 	private void ShowTags() {
 		print( "<h4 class='align-left'>Tags" );
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			StaticElement("+", "tag-tag", "mPlugin.ShowAddTag();");
 		}
 		print( "</h4>" );
@@ -112,9 +112,9 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 		" );
 
 		{ // initialize "rownum" variable
-			string query = "SET @rownum := 0";
+			var query = "SET @rownum := 0";
 
-			int error = mysql_query( Database.Handle, query );
+			var error = mysql_query( Database.Handle, query );
 			if ( error ) {
 				throw mysql_error( Database.Handle );
 			}
@@ -142,12 +142,12 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 			var id = mysql_get_field_value( result, "id" );
 			var md5sum = mysql_get_field_value( result, "md5sum" );
 			var num = cast<int>( mysql_get_field_value( result, "num" ) );
-			var rating_count = mysql_get_field_value( result, "rating_count" );
-			var rating_value = mysql_get_field_value( result, "rating_value" );
+			var rating_count = cast<int>( mysql_get_field_value( result, "rating_count" ) );
+			var rating_value = cast<int>( mysql_get_field_value( result, "rating_value" ) );
 			var title = substr( mysql_get_field_value( result, "title" ), 0, 42 );
 			var views = mysql_get_field_value( result, "views" );
 
-			ShowCollectionItem( collectionID, collectionItemID, id, md5sum, Utils.prepareRating( cast<int>( rating_value ), cast<int>( rating_count ) ), title, views, Utils.mIsLoggedIn );
+			ShowCollectionItem( collectionID, collectionItemID, id, md5sum, Utils.prepareRating( rating_value, rating_count ), title, views, Utils.mIsLoggedIn );
 		}
 
 		print( "
