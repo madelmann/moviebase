@@ -1,13 +1,9 @@
--- auto-generated definition
-create table downloads
-(
-    id      int auto_increment
-        primary key,
-    source  varchar(1024)               not null,
-    target  varchar(1024)               not null,
-    created timestamp default sysdate() null,
-    started timestamp                   null,
-    done    timestamp                   null
-);
-
-
+CREATE TABLE `downloads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `source` varchar(1024) NOT NULL,
+  `target` varchar(1024) NOT NULL,
+  `created` timestamp NULL DEFAULT sysdate(),
+  `started` timestamp NULL DEFAULT NULL,
+  `done` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

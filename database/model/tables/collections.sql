@@ -1,16 +1,13 @@
--- auto-generated definition
-create table collections
-(
-    id           int auto_increment
-        primary key,
-    identifier   varchar(255)         not null,
-    name         varchar(255)         null,
-    description  varchar(4069)        null,
-    type         int        default 0 not null,
-    is_public    tinyint(1) default 0 not null,
-    tags         varchar(1024)        null,
-    rating_value int        default 0 not null,
-    rating_count int        default 0 not null
-);
-
-
+CREATE TABLE `collections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` int(11) NOT NULL DEFAULT 0,
+  `is_public` tinyint(1) NOT NULL DEFAULT 0,
+  `tags` varchar(1024) DEFAULT NULL,
+  `description` varchar(4096) DEFAULT NULL,
+  `rating_count` int(11) NOT NULL DEFAULT 0,
+  `rating_value` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `collections_id_index` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;

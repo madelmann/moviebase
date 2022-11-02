@@ -1,11 +1,7 @@
--- auto-generated definition
-create table news
-(
-    id      int auto_increment
-        primary key,
-    created timestamp default current_timestamp() not null on update current_timestamp(),
-    title   varchar(256)                          not null,
-    message text                                  null
-);
-
-
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `title` varchar(256) NOT NULL,
+  `message` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;

@@ -1,24 +1,25 @@
--- auto-generated definition
-create table items
-(
-    id            int auto_increment
-        primary key,
-    filename      varchar(4096)                          null,
-    title         varchar(4096)                          null,
-    text          varchar(4096)                          null,
-    md5sum        varchar(32)                            null,
-    actors        varchar(1024)                          null,
-    tags          mediumtext                             null,
-    length        int        default 0                   null,
-    owner         varchar(80)                            null,
-    is_private    tinyint(1) default 0                   not null,
-    last_modified timestamp  default current_timestamp() not null on update current_timestamp(),
-    added         datetime                               null,
-    rating_count  int        default 0                   not null,
-    rating_value  int        default 0                   not null,
-    views         int        default 0                   not null,
-    deleted       tinyint(1) default 0                   null,
-    filesize      int        default 0                   null
-);
-
-
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(4096) DEFAULT NULL,
+  `title` varchar(4096) DEFAULT NULL,
+  `text` varchar(4096) DEFAULT NULL,
+  `md5sum` varchar(32) DEFAULT NULL,
+  `actors` varchar(700) DEFAULT NULL,
+  `tags` varchar(700) DEFAULT NULL,
+  `length` int(11) DEFAULT 0,
+  `owner` varchar(80) DEFAULT NULL,
+  `is_private` tinyint(1) NOT NULL DEFAULT 0,
+  `last_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `added` datetime DEFAULT NULL,
+  `rating_count` int(11) NOT NULL DEFAULT 0,
+  `rating_value` int(11) NOT NULL DEFAULT 0,
+  `views` int(11) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) DEFAULT 0,
+  `filesize` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `items_md5sum_key` (`md5sum`),
+  KEY `items_id_index` (`id`),
+  KEY `items_md5sum_index` (`md5sum`),
+  KEY `items_actors_index` (`actors`(191)),
+  KEY `items_tags_index` (`tags`(191))
+) ENGINE=InnoDB AUTO_INCREMENT=6882 DEFAULT CHARSET=utf8mb4;
