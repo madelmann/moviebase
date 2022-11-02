@@ -9,14 +9,18 @@ import libs.UI.Controls;
 import libs.Utils;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		int page = 1;
 		if ( isSet( "page" ) ) {
 			page = cast<int>( mysql_real_escape_string( Database.Handle, get( "page" ) ) );
 		}
 
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 			print( "<button id='cancel' class='cancel' hidden='true' onclick='mPlugin.HideAll();'>X</button>" );
 			EditableLabelWithStore( "name", "", 20 );
 		}
@@ -31,7 +35,7 @@ public object RenderPlugin implements IRenderPlugin {
 
 	private void ShowCollections() throws {
 		print("<h5 class='align-left'>Collections");
-		//if ( Utils.mIsAdmin ) {
+		//if ( isAdmin() ) {
 			StaticElement("+", "collection-tag", "mPlugin.ShowAddCollection();");
 		//}
 		print("</h5>");
@@ -45,7 +49,7 @@ public object RenderPlugin implements IRenderPlugin {
 
 	private void ShowTags() {
 		print( "<h5 class='align-left'>Tags" );
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			StaticElement( "+", "tag-tag", "mPlugin.ShowAddTag();" );
 		}
 		print( "</h5>" );

@@ -8,8 +8,10 @@ import libs.UI.Controls;
 import Consts;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
     public void Constructor() throws {
+		base.Constructor();
+
 		if ( isSet("allowDelete") ) {
 			mAllowDelete = cast<bool>( get( "allowDelete" ) );
 		}
@@ -32,9 +34,9 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowActor(int handle) {
-		int count = cast<int>( mysql_get_field_value(Database.Handle, "cnt") );
-		string id = mysql_get_field_value(Database.Handle, "id");
-		string name = mysql_get_field_value(Database.Handle, "name");
+		var count = cast<int>( mysql_get_field_value(Database.Handle, "cnt") );
+		var id = mysql_get_field_value(Database.Handle, "id");
+		var name = mysql_get_field_value(Database.Handle, "name");
 
 		if ( count <= 1 && !mShowAll ) {
 			return;
@@ -51,7 +53,7 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowActors() throws {
-		string query = "SELECT * FROM (SELECT a.id, a.name, COUNT(a.name) as cnt FROM actors a LEFT JOIN items i ON ( i.actors LIKE a.name ) GROUP BY a.name) AS sub";
+		var query = "SELECT * FROM (SELECT a.id, a.name, COUNT(a.name) as cnt FROM actors a LEFT JOIN items i ON ( i.actors LIKE a.name ) GROUP BY a.name) AS sub";
 
 		//#ORDER BY cnt DESC, name ASC";
 

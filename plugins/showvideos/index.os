@@ -8,7 +8,11 @@ import libs.Plugins.RenderPlugin;
 import libs.Utils;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		string sortBy = "title";
 		if ( isSet( "sortBy" ) ) {
@@ -31,7 +35,7 @@ public object RenderPlugin implements IRenderPlugin {
 		print( "<td>" + views + "</td>" );
 		print( "<td>" + Utils.prepareRating( rating_value, rating_count ) + "</td>" );
 		//print( "<td>" + tags + "</td>" );
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 		print( "<td><button onclick='mPlugin.HideVideo( " + id + " );'>X</button>" );
 		}
 		print( "</tr>" );
@@ -65,7 +69,7 @@ public object RenderPlugin implements IRenderPlugin {
 		print( "<th onlick='mPlugin.SortByViews();'>Views</th>" );
 		print( "<th onlick='mPlugin.SortByRating();'>Rating</th>" );
 		//print( "<th>Tags</th>" );
-		if ( Utils.mIsAdmin ) {
+		if ( isAdmin() ) {
 		print( "<th></th>" );
 		}
 		print( "</tr>" );

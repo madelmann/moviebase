@@ -12,11 +12,15 @@ import libs.UI.Controls;
 import libs.Utils;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		print( "<div class='video-wrapper'>" );
 
-		if ( Utils.mIsAdmin ) {
+		if ( mSession && mSession.isAdmin() ) {
 			ShowVideo();
 
 			EditableLabelWithStore("title", "", 12);
@@ -53,7 +57,7 @@ public object RenderPlugin implements IRenderPlugin {
 
 	private void ShowActors() {
 		print("<h5 class='align-left'>Actors");
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			StaticElement("+", "actor-tag", "mPlugin.ShowAddActor();");
 		}
 		print("</h5>");
@@ -67,7 +71,7 @@ public object RenderPlugin implements IRenderPlugin {
 
 	private void ShowCollections() throws {
 		print("<h5 class='align-left'>Collections");
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			StaticElement("+", "collection-tag", "mPlugin.ShowAddCollection();");
 		}
 		print("</h5>");
@@ -82,14 +86,14 @@ public object RenderPlugin implements IRenderPlugin {
 	private void ShowPrivate() {
 		print( "
 			<h5 class='align-left'>Private
-			<input id='is_private' type='checkbox' class='form-check-input' onclick='mPlugin.SetPrivate();' " + ( Utils.mIsAdmin ? "enabled" : "disabled" ) + ">
+			<input id='is_private' type='checkbox' class='form-check-input' onclick='mPlugin.SetPrivate();' " + ( isAdmin() ? "enabled" : "disabled" ) + ">
 			</h5>
 		" );
 	}
 
 	private void ShowTags() {
 		print("<h5 class='align-left'>Tags");
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			StaticElement("+", "tag-tag", "mPlugin.ShowAddTag();");
 		}
 		print("</h5>");
@@ -102,7 +106,7 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowText() {
-		if ( Utils.mIsLoggedIn ) {
+		if ( isAdmin() ) {
 			EditableTextAreaWithStore( "text", "text", "", 10);
 		}
 		else {

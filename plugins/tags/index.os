@@ -8,8 +8,10 @@ import libs.UI.Controls;
 import Consts;
 
 
-public object RenderPlugin implements IRenderPlugin {
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 	public void Constructor() throws {
+		base.Constructor();
+
 		if ( isSet("allowDelete") ) {
 			mAllowDelete = bool get("allowDelete");
 		}
@@ -29,8 +31,8 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowTag(int handle) {
-		string id = mysql_get_field_value(Database.Handle, "id");
-		string name = mysql_get_field_value(Database.Handle, "name");
+		var id = mysql_get_field_value(Database.Handle, "id");
+		var name = mysql_get_field_value(Database.Handle, "name");
 
 		print("<li class='tag'>");
 		print("<span>");
@@ -43,16 +45,16 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void ShowTags() throws {
-		string query = "SELECT id, name FROM tags ORDER BY name ASC";
+		var query = "SELECT id, name FROM tags ORDER BY name ASC";
 
-		int error = mysql_query(Database.Handle, query);
+		var error = mysql_query(Database.Handle, query);
 		if ( error ) {
 			throw mysql_error(Database.Handle);
 		}
 
 		print("<ul>");
 
-		int result = mysql_store_result(Database.Handle);
+		var result = mysql_store_result(Database.Handle);
 		while ( mysql_fetch_row(result) ) {
 			ShowTag(result);
 		}

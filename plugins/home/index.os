@@ -14,7 +14,12 @@ import libs.Plugins.RenderPlugin;
 
 private int NumPages;
 
-public object RenderPlugin implements IRenderPlugin {
+
+public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
+	public void Constructor() {
+		base.Constructor();
+	}
+
 	public void Render() {
 		var identifier = API.retrieve( "identifier", "" );
 		var page = API.retrieve( "page", 1 );
