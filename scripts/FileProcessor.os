@@ -8,6 +8,10 @@ import System.IO.File;
 import libs.Database.Tables.Items;
 import TagProcessor;
 
+
+public string AVI const = ".avi";
+public string MP4 const = ".mp4";
+
 public enum OperationMode {
 	Filename,
 	MD5sum,
@@ -38,14 +42,13 @@ public object FileProcessor {
 		}
 	}
 
-	public void Constructor(string filename, int dbHandle, Settings settings) {
+	public void Constructor( string filename, int dbHandle, Settings settings ) {
 		assert( settings );
 
-		mDBHandle     = dbHandle;
-		mFilename     = filename;
-		mSettings     = settings;
-		mTagProcessor = new TagProcessor(dbHandle);
-
+		mDatabaseHandle = dbHandle;
+		mFilename       = filename;
+		mSettings       = settings;
+		mTagProcessor   = new TagProcessor( dbHandle );
 
 		// fetch owner for admin user
 		{
@@ -57,7 +60,7 @@ public object FileProcessor {
 	}
 
 	public void process() {
-		var file = new System.IO.File(mFilename, System.IO.File.AccessMode.ReadOnly);
+		var file = new System.IO.File( mFilename, System.IO.File.AccessMode.ReadOnly );
 
 		string c;
 		string filename;
@@ -65,7 +68,7 @@ public object FileProcessor {
 			c = file.readChar();
 
 			if ( c == LINEBREAK ) {
-				processFilename(mysql_real_escape_string(mDBHandle, filename));
+				processFilename( mysql_real_escape_string( mDatabaseHandle, filename ) );
 
 				filename = "";
 				continue;
@@ -75,39 +78,39 @@ public object FileProcessor {
 		}
 	}
 
-	private bool checkFilenameExists(string filename) throws {
-		string query = "SELECT * FROM items WHERE filename = \"" + filename + "\"";
+	private bool checkFilenameExists( string filename ) throws {
+		var query = "SELECT * FROM items WHERE filename = \"" + filename + "\"";
 
-		var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		var result = mysql_store_result(mDBHandle);
+		var result = mysql_store_result( mDatabaseHandle );
 		if ( !result ) {
 			throw "no result found";
 		}
 
-		return mysql_num_rows(result) > 0;
+		return mysql_num_rows( result ) > 0;
 	}
 
-	private bool checkMD5sumExists(string md5sum) throws {
-		string query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
+	private bool checkMD5sumExists( string md5sum ) throws {
+		var query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
 
-		var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		var result = mysql_store_result(mDBHandle);
+		var result = mysql_store_result( mDatabaseHandle );
 		if ( !result ) {
 			throw "no result found";
 		}
 
-		return mysql_num_rows(result) > 0;
+		return mysql_num_rows( result ) > 0;
 	}
 
-	private bool checkThumbnailExists(string md5sum) {
+	private bool checkThumbnailExists( string md5sum ) {
 		try {
 			var result = cast<int>( system( "locate '" + md5sum + "' | wc -l " ) );
 			if ( result > 0 ) {
@@ -119,15 +122,15 @@ public object FileProcessor {
 	}
 
 	private void deleteItem( string filename ) throws {
-		string query = "UPDATE items SET deleted = true WHERE filename = '" + filename + "'";
+		var query = "UPDATE items SET deleted = true WHERE filename = '" + filename + "'";
 
-		var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 	}
 
-	private int generateThumbnail(string md5sum, string filename) {
+	private int generateThumbnail( string md5sum, string filename ) {
 		system( "ffmpegthumbnailer "
                       + " -i \"" + filename + "\""
                       + " -o " + mSettings.FilePath + md5sum
@@ -143,118 +146,121 @@ public object FileProcessor {
 		return cast<int>( system( "echo $?" ) );
 	}
 
-	private string getFileSize(string filename) {
-		string size = system( "du \"" + filename + "\"" );
+	private string getFileSize( string filename ) {
+		var size = system( "du \"" + filename + "\"" );
 
 		return substr( size, 0, strfind( size, TABULATOR, 0 ) );
 	}
 
-	private string getMD5sum(string filename) {
+	private string getMD5sum( string filename ) {
 		return substr( system( "md5sum \"" + filename + "\"" ), 0, 31 );
 	}
 
-	private void insertItem(string md5sum, string filename, string filesize) throws {
+	private void insertItem( string md5sum, string filename, string filesize ) throws {
 		int pos = 0;
 		string title = filename;
 
-		while ( (pos = strfind(title, "/")) > 0 ) {
-			title = substr(title, pos + 1);
+		while ( ( pos = strfind( title, "/" ) ) > 0 ) {
+			title = substr( title, pos + 1 );
 		}
 
-		pos = strfind(title, ".mp4");
+		pos = strfind( title, MP4 );
+		if ( pos == -1 ) {
+			pos = strfind( title, AVI );
+		}
 		if ( pos > 0 ) {
-			title = substr(title, 0, strlen(title) - 4);
+			title = substr( title, 0, strlen( title ) - 4 );
 		}
 
-		string query = "INSERT INTO items (added, filename, filesize, md5sum, owner, title) \
-				VALUES (NOW(), \"" + filename + "\", " + filesize + ", \"" + md5sum + "\", \"" + mOwner + "\", \"" + mysql_real_escape_string(mDBHandle, title) + "\")\
-				ON DUPLICATE KEY UPDATE \
-					filename = \"" + filename + "\",
-					owner = \"" + mOwner + "\",
-					title = \"" + title  + "\"
-				";
+		var query = "INSERT INTO items ( added, filename, filesize, md5sum, owner, title ) \
+					 VALUES ( NOW(), \"" + filename + "\", " + filesize + ", \"" + md5sum + "\", \"" + mOwner + "\", \"" + mysql_real_escape_string( mDatabaseHandle, title ) + "\" )\
+					 ON DUPLICATE KEY UPDATE \
+						filename = \"" + filename + "\",
+						owner = \"" + mOwner + "\",
+						title = \"" + title  + "\"
+					 ";
 
-				var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
 		// update tags for newly inserted item
 		{
-			string query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
+			var query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
 
-			var error = mysql_query(mDBHandle, query);
+			var error = mysql_query( mDatabaseHandle, query );
 			if ( error ) {
-				throw mysql_error(mDBHandle);
+				throw mysql_error( mDatabaseHandle );
 			}
 
-			var result = mysql_store_result(mDBHandle);
+			var result = mysql_store_result( mDatabaseHandle );
 			if ( !result ) {
-				throw mysql_error(mDBHandle);
+				throw mysql_error( mDatabaseHandle );
 			}
 
-			if ( mysql_fetch_row(result) ) {
-				mTagProcessor.processItem(result);
+			if ( mysql_fetch_row( result ) ) {
+				mTagProcessor.processItem( result );
 			}
 		}
 	}
 
-	private TItemsRecord loadItemByFilename(string filename) throws {
-		string query = "SELECT * FROM items WHERE filename = \"" + filename + "\"";
+	private TItemsRecord loadItemByFilename( string filename ) throws {
+		var query = "SELECT * FROM items WHERE filename = \"" + filename + "\"";
 
-		var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		var result = mysql_store_result(mDBHandle);
+		var result = mysql_store_result( mDatabaseHandle );
 		if ( !result ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		if ( !mysql_fetch_row(result) ) {
+		if ( !mysql_fetch_row( result ) ) {
 			return TItemsRecord null;
 		}
 
 		var record = new TItemsRecord();
-		record.Actors = mysql_get_field_value(result, "actors");
-		record.Deleted = cast<bool>( mysql_get_field_value(result, "deleted") );
+		record.Actors = mysql_get_field_value( result, "actors" );
+		record.Deleted = cast<bool>( mysql_get_field_value( result, "deleted" ) );
 		record.Filename = filename;
-		record.Filesize = cast<int>( mysql_get_field_value(result, "filesize") );
-		record.Id = cast<int>( mysql_get_field_value(result, "id") );
-		record.Md5sum = mysql_get_field_value(result, "md5sum");
-		record.Tags = mysql_get_field_value(result, "tags");
-		record.Title = mysql_get_field_value(result, "title");
+		record.Filesize = cast<int>( mysql_get_field_value( result, "filesize" ) );
+		record.Id = cast<int>( mysql_get_field_value( result, "id" ) );
+		record.Md5sum = mysql_get_field_value( result, "md5sum" );
+		record.Tags = mysql_get_field_value( result, "tags" );
+		record.Title = mysql_get_field_value( result, "title" );
 
 		return record;
 	}
 
-	private TItemsRecord loadItemByMD5sum(string md5sum) throws {
-		string query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
+	private TItemsRecord loadItemByMD5sum( string md5sum ) throws {
+		var query = "SELECT * FROM items WHERE md5sum = \"" + md5sum + "\"";
 
-		var error = mysql_query(mDBHandle, query);
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		var result = mysql_store_result(mDBHandle);
+		var result = mysql_store_result( mDatabaseHandle );
 		if ( !result ) {
-			throw mysql_error(mDBHandle);
+			throw mysql_error( mDatabaseHandle );
 		}
 
-		if ( !mysql_fetch_row(result) ) {
+		if ( !mysql_fetch_row( result ) ) {
 			return TItemsRecord null;
 		}
 
 		var record = new TItemsRecord();
-		record.Actors = mysql_get_field_value(result, "actors");
-		record.Deleted = cast<bool>( mysql_get_field_value(result, "deleted") );
-		record.Filename = mysql_get_field_value(result, "filename");
-		record.Filesize = cast<int>( mysql_get_field_value(result, "filesize") );
-		record.Id = cast<int>( mysql_get_field_value(result, "id") );
+		record.Actors = mysql_get_field_value( result, "actors" );
+		record.Deleted = cast<bool>( mysql_get_field_value( result, "deleted" ) );
+		record.Filename = mysql_get_field_value( result, "filename" );
+		record.Filesize = cast<int>( mysql_get_field_value( result, "filesize" ) );
+		record.Id = cast<int>( mysql_get_field_value( result, "id" ) );
 		record.Md5sum = md5sum;
-		record.Tags = mysql_get_field_value(result, "tags");
-		record.Title = mysql_get_field_value(result, "title");
+		record.Tags = mysql_get_field_value( result, "tags" );
+		record.Title = mysql_get_field_value( result, "title" );
 
 		return record;
 	}
@@ -264,8 +270,8 @@ public object FileProcessor {
 		if ( !record ) {
 			// no record with this filename found => insert a completely new item
 
-			string filesize = getFileSize( filename );
-			string md5sum = getMD5sum( filename );
+			var filesize = getFileSize( filename );
+			var md5sum   = getMD5sum( filename );
 
 			insertItem( md5sum, filename, filesize );
 			write( "inserted " );
@@ -321,7 +327,7 @@ public object FileProcessor {
 		write( "generated thumbnail " );
 	}
 
-	private void processFilename(string filename) {
+	private void processFilename( string filename ) {
 		if ( !mSettings.Folders.empty() ) {
 			foreach ( string folder : mSettings.Folders ) {
 				if ( folder != substr( filename, 0, strlen( folder ) ) ) {
@@ -357,22 +363,22 @@ public object FileProcessor {
 	}
 
 	private void updateFileSize( string filename ) throws {
-		string size = getFileSize( filename );
+		var size = getFileSize( filename );
 		if ( !size ) {
 			return;
 		}
 
-		string query = "UPDATE items SET filesize = " + size + " WHERE filename = \"" + filename + "\"";
+		var query = "UPDATE items SET filesize = " + size + " WHERE filename = \"" + filename + "\"";
 
-		var error = mysql_query( mDBHandle, query );
+		var error = mysql_query( mDatabaseHandle, query );
 		if ( error ) {
-			throw mysql_error( mDBHandle );
+			throw mysql_error( mDatabaseHandle );
 		}
 
 		write( "updated file size " );
 	}
 
-	private int mDBHandle;
+	private int mDatabaseHandle;
 	private string mFilename;
 	private string mOwner;
 	private Settings mSettings;
