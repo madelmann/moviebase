@@ -5,53 +5,58 @@ import System.Collections.Set;
 import System.StringIterator;
 
 // project imports
+import libs.API;
 import libs.Plugins.ExecutePlugin;
 
 
 public object ExecutePlugin implements IExecutePlugin {
 	public bool Execute() throws {
-		if ( !isSet( "collectionID" ) ) {
-			throw "collectionID is missing!";
-		}
-
-		string collectionID = mysql_real_escape_string( Database.Handle, get( "collectionID" ) );
+		var collectionID = API.retrieve( "collectionID" );
 		if ( !collectionID ) {
 			throw "invalid collectionID provided!";
 		}
 
-		Json.AddElement( "collectionID", collectionID );
-
-		if ( isSet( "tag" ) ) {
-			string originalTags = Database.retrieveField( TABLE, "tags", collectionID );
-
-			var originalTagIt = new StringIterator( originalTags, "|" );
-			var tags = new Set<string>();
-
-			while ( originalTagIt.hasNext() ) {
-				if ( originalTagIt.next() ) {
-					tags.insert( originalTagIt.current() );
-				}
-			}
-
-			string tag = get( "tag" );
-			if ( tag && !tags.contains( tag ) ) {
-				tags.insert( tag );
-			}
-
-			string newTags;
-			var newTagIt = tags.getIterator();
-			while ( newTagIt.hasNext() ) {
-				newTags += newTagIt.next();
-
-				if ( newTagIt.hasNext() ) {
-					newTags += "|";
-				}
-			}
-
-			return Database.updateField( TABLE, "tags", collectionID, mysql_real_escape_string( Database.Handle, newTags ) );
+		var tag = toLower( API.retrieve( "tag" ) );
+		if ( !tag ) {
+			throw "invalid tag provided!";
 		}
 
-		throw "tag is missing!";
+		Json.AddElement( "collectionID", collectionID );
+
+		var tags = new String( Database.retrieveField( TABLE, "tags", collectionID ) );
+
+		bool inserted = false;
+		string newTags;
+		foreach ( string currentTag : tags.SplitBy( "|" ) ) {
+			if ( currentTag == tag ) {
+				// tag already exists
+				return true;
+			}
+			if ( !inserted && currentTag > tag ) {
+				if ( newTags ) {
+					newTags += "|";
+				}
+
+				newTags += tag;
+				inserted = true;
+			}
+
+			if ( newTags ) {
+				newTags += "|";
+			}
+
+			newTags += currentTag;
+		}
+
+		if ( !inserted ) {
+			if ( newTags ) {
+				newTags += "|";
+			}
+
+			newTags += tag;
+		}
+
+		return Database.updateField( TABLE, "tags", collectionID, newTags );
 	}
 
 	private string TABLE const = "collections";
