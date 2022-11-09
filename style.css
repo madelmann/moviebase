@@ -277,7 +277,7 @@ ul {
 	cursor: default;
 	font-family: inherit;
 	/*font-size: 12pt;*/
-	font-weight: bold;
+	/*font-weight: bold;*/
 	/*left: 0px;*/
 	/*padding-top: 10px;*/
 	position: relative;
@@ -365,10 +365,10 @@ ul {
 }
 
 #Statusbar {
-	background: linear-gradient(#72B095, #101010);
+	background: linear-gradient(#838c88, #101010);
 	/* border: 1px solid blue; */
 	/* min-height: 100px; */
-	padding-top: 10px;
+	padding-top: 20px;
 	/* position: absolute; */
 	text-align: center;
 }

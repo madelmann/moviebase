@@ -33,6 +33,7 @@ USER_FEEDBACK: User feedback
 
 [Section: header]
 LOGIN: Log in
+SEARCH: Suchen
 SETTINGS: Settings
 
 [Section: loginView]

@@ -1,8 +1,8 @@
 
 <div id="Statusbar" style="display: block;">
 	<span id="search-area">
-		<input id="query" type="text" />
-		<button type="submit" class="translations" token="SEARCH" onclick="SearchVideos();">SEARCH</button>
+		<input id="query" type="text" class="translation-placeholder" token="SEARCH" placeholder="Search..." />
+		<button type="submit" class="btn-warning translation" token="SEARCH" onclick="SearchVideos();">SEARCH</button>
 	</span>
 
 	<label id="login_label" class="menu_item translation" token="LOGIN" onclick="Header.Login();">LOGIN</label>
@@ -27,13 +27,13 @@
 		<li class="nav-item">
 			<a class="nav-link menu_item translation admin_hidden" token="SHOW_ADMIN" onclick="Header.ShowAdmin();">SHOW_ADMIN</a>
 		</li>
-	<!--
+<!--
 		<li class="nav-item">
 			<a class="nav-link menu_item translation admin_hidden" token="SHOW_TAGS" onclick="Header.ShowTags();">SHOW_TAGS</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link menu_item translation admin_hidden" token="SHOW_VIDEOS" onclick="Header.ShowVideos();">SHOW_VIDEOS</a>
 		</li>
-	-->
+-->
 	</ul>
 </div>
