@@ -16,7 +16,7 @@ OnError: function(event) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "addvideo";
+	this.pluginName = "addvideo";
 
 	mElTags = document.getElementById("tags_input");
 	mElTitle = document.getElementById("title_input");

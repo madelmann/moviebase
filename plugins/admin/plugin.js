@@ -1,8 +1,14 @@
 
 mPlugin = {
 
+    // consts
+    ADMIN_VIEW: "admin",
+
+    // instance members
+    pluginName: "admin",
+
 	OnLoad: function(event) {
-		this.mPluginName = "admin";
+		this.pluginName = "admin";
 
 		mPlugin.mElSource = document.getElementById("source");
 		mPlugin.mElTarget = document.getElementById("target");

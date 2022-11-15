@@ -12,7 +12,7 @@ OnError: function( event ) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "showactor";
+	this.pluginName = "showactor";
 
 	mElActorImage = document.getElementById( "actor_image" );
 	mElCollectionPlugin = document.getElementById( "collection-plugin" );

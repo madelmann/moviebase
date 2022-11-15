@@ -13,7 +13,7 @@ OnError: function( event ) {
 
 OnLoad: function( callback ) {
 	this.mCallback = callback;
-	this.mPluginName = "advancedsearch";
+	this.pluginName = "advancedsearch";
 
 	this.mElSearchResult = document.getElementById( "searchresults" );
 

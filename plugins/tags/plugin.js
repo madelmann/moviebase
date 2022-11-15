@@ -1,8 +1,4 @@
 
-function FormClick(event) {
-}
-
-
 mTagsPlugin = {
 
 OnAbort: function(event) {
@@ -17,7 +13,7 @@ OnError: function(event) {
 
 OnLoad: function(callback) {
 	this.mCallback = callback;
-	this.mPluginName = "tags";
+	this.pluginName = "tags";
 
 	Parameters.add("allowDelete", Account.IsLoggedIn());
 	Parameters.add("allowSearch", Account.IsLoggedIn());

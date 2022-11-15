@@ -10,7 +10,7 @@ OnError: function( event ) {
 },
 
 OnLoad: function( event ) {
-	this.mPluginName = "search";
+	this.pluginName = "search";
 
 	mElQuery = document.getElementById( "query" );
 	mElResult = document.getElementById( "result" );

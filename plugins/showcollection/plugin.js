@@ -20,7 +20,7 @@ OnError: function(event) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "showcollection";
+	this.pluginName = "showcollection";
 
 	mElCollectionPlugin = document.getElementById( "collection-plugin" );
 	mElCollections = document.getElementById( "collections" );

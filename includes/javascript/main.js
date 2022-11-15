@@ -3,6 +3,7 @@
 // Initial member declarations
 var Account;
 var API;
+var Cache = {};
 var mGlobals = {};
 var Header;
 var History;

@@ -1,9 +1,11 @@
 
-function FormClick(event) {
-}
-
-
 mPlugin = {
+
+    // consts
+    HOME_VIEW: "home",
+
+    // instance members
+    pluginName: "home",
 
 OnAbort: function(event) {
 	// request execution failed
@@ -16,36 +18,11 @@ OnError: function(event) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "home";
-
 	mPlugin.OnLoadReady();
 },
 
 OnLoadReady: function() {
-},
-
-OnSuccess: function(event) {
-},
-
-OnUpdateSuccess: function(event) {
-	// request execution was successful
-	//alert("OnSuccess: " + event.currentTarget.responseText);
-
-	var response = {};
-
-	if ( ParseJSON(event.currentTarget.responseText, response) ) {
-		// json string has been parsed successfully
-		if ( response.message.result == "success" ) {
-			History.Refresh();
-		}
-		else {
-			alert("An error occured while updating the current video!");
-		}
-	}
-	else {
-		// error while parsing json string
-		alert(response.message);
-	}
+	this.QueryStats();
 },
 
 HideAll: function() {
@@ -64,6 +41,16 @@ Home: function() {
 	Parameters.clear();
 
 	LoadPluginWithHistory("home");
+},
+
+QueryStats: function() {
+	Parameters.clear();
+
+	api2( "public/stats/", ( json ) => {
+
+		Cache.Stats = json;
+
+	}, OnError, OnAbort );
 },
 
 SearchTag: function(tag) {

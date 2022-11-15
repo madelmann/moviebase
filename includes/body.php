@@ -5,7 +5,7 @@
 		<?php include( "plugins/header/index.html" ); ?>
 	</div>
 	<div id="clientarea">
-		<div id="plugin_html" style="display: block;" onclick="FormClick();">
+		<div id="plugin_html" style="display: block;">
 			<?php include( "plugins/loading/index.html" ); ?>
 		</div>
 	</div>

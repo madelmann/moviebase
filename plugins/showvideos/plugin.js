@@ -12,7 +12,7 @@ OnError: function(event) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "showvideos";
+	this.pluginName = "showvideos";
 
 	this.OnLoadReady();
 },

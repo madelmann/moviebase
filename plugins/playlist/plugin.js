@@ -20,7 +20,7 @@ OnError: function( event ) {
 },
 
 OnLoad: function() {
-	this.mPluginName = "showcollection";
+	this.pluginName = "showcollection";
 
 	mElVideoPlugin = document.getElementById( "result" );
 	mElVideoPlayer = null;

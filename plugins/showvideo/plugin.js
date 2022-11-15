@@ -12,7 +12,7 @@ OnError: function(event) {
 },
 
 OnLoad: function( callback ) {
-	this.mPluginName = "showvideo";
+	this.pluginName = "showvideo";
 
 	mElActorPlugin = document.getElementById("actor-plugin");
 	mElActors = document.getElementById("actors");
@@ -177,6 +177,10 @@ FillItemData: function(data) {
 
 		if ( !mElVideoPlayer.src ) {
 			mElVideoPlayer.src = data.filename;
+
+			if ( Cache.Stats && Cache.Stats.remote_storage ) {
+				mElVideoPlayer.src = Cache.Stats.remote_storage + data.filename;
+			}
 		}
 	}
 	if ( data.is_private ) {

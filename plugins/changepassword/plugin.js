@@ -12,7 +12,7 @@ OnError: function(event) {
 },
 
 OnLoad: function(event) {
-	this.mPluginName = "";
+	this.pluginName = "changepassword";
 
 	mElPassword1 = document.getElementById("password1");
 	mElPassword2 = document.getElementById("password2");

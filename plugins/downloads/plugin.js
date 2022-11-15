@@ -1,8 +1,4 @@
 
-function FormClick(event) {
-}
-
-
 mPlugin = {
 
 OnAbort: function(event) {
@@ -16,7 +12,7 @@ OnError: function(event) {
 },
 
 OnLoad: function(event) {
-	this.mPluginName = "admin";
+	this.pluginName = "admin";
 
 	mPlugin.mElSource = document.getElementById("source");
 	mPlugin.mElTarget = document.getElementById("target");
