@@ -7,7 +7,8 @@ import libs.MainProcessDB;
 
 
 public void Process( int argc, string args ) {
-	print( "private" );
-    print( "public" );
+	print( "actors" );
+	print( "stats" );
+	print( "tags" );
 }
 
