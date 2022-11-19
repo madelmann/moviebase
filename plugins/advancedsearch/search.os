@@ -15,11 +15,7 @@ import libs.Plugins.RenderPlugin;
 
 public object RenderPlugin implements IPlugin {
 	public void Render() modify {
-		if ( !isSet( "searchTags" ) ) {
-			return ShowNoQueryGiven();
-		}
-
-		string searchTags = mysql_real_escape_string( Database.Handle, get( "searchTags" ) );
+		var searchTags = API.retrieve( "searchTags", "" );
 		if ( !searchTags || searchTags == "|" ) {
 			return ShowNoQueryGiven();
 		}
@@ -40,7 +36,7 @@ public object RenderPlugin implements IPlugin {
 	private List<string> ExtractTags( string userquery ) {
 		var result = new List<string>();
 
-		StringIterator it = new StringIterator( userquery, "|" );
+		var it = new StringIterator( userquery, "|" );
 		while ( it.hasNext() ) {
 			result.push_back( it.next() );
 		}
@@ -53,7 +49,7 @@ public object RenderPlugin implements IPlugin {
 	}
 
 	private void PrintResult( int result ) modify {
-		string filename = mysql_get_field_value( result, "filename" );
+		var filename = mysql_get_field_value( result, "filename" );
 		if ( mResults.contains( filename ) ) {
 			return;
 		}
@@ -65,14 +61,14 @@ public object RenderPlugin implements IPlugin {
 			return;
 		}
 
-		string id = mysql_get_field_value( result, "id" );
-		string actors = mysql_get_field_value( result, "actors" );
-		string md5sum = mysql_get_field_value( result, "md5sum" );
-		string rating_count = mysql_get_field_value( result, "rating_count" );
-		string rating_value = mysql_get_field_value( result, "rating_value" );
-		string tags = mysql_get_field_value( result, "tags" );
-		string title = substr( mysql_get_field_value(result , "title" ), 0, 42 );
-		string views = mysql_get_field_value( result, "views" );
+		var id = mysql_get_field_value( result, "id" );
+		var actors = mysql_get_field_value( result, "actors" );
+		var md5sum = mysql_get_field_value( result, "md5sum" );
+		var rating_count = mysql_get_field_value( result, "rating_count" );
+		var rating_value = mysql_get_field_value( result, "rating_value" );
+		var tags = mysql_get_field_value( result, "tags" );
+		var title = substr( mysql_get_field_value(result , "title" ), 0, 42 );
+		var views = mysql_get_field_value( result, "views" );
 
 		ShowVideoPreview( id, md5sum, Utils.prepareRating( cast<int>( rating_value ), cast<int>( rating_count ) ), title, views, Utils.mIsLoggedIn );
 	}
@@ -80,7 +76,7 @@ public object RenderPlugin implements IPlugin {
 	private void Query( string query ) modify throws {
 		mysql_query( Database.Handle, query );
 
-		int result = mysql_store_result( Database.Handle );
+		var result = mysql_store_result( Database.Handle );
 		if ( !result ) {
 			throw mysql_error( Database.Handle );
 		}
@@ -118,7 +114,7 @@ public object RenderPlugin implements IPlugin {
 		print( "<div class='pagination3'>" );
 		print( "<ul class='firstPage'>" );
 
-		int numPages = getNumPages();
+		var numPages = getNumPages();
 		foreach ( int pageNum : 1..numPages ) {	
 			if (
 				pageNum != 1 && pageNum != numPages					// first and last page will always be visible

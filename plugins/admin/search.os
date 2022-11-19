@@ -26,7 +26,7 @@ public object RenderPlugin implements IRenderPlugin {
 		mResults = new List<string>();
 
 		SearchActor( query );
-		SearchName( query );
+		SearchTitle( query );
 
 		var tags = ExtractTags( query );
 		if ( !tags.empty() ) {
@@ -39,7 +39,7 @@ public object RenderPlugin implements IRenderPlugin {
 	private List<string> ExtractTags( string userquery ) {
 		var result = new List<string>();
 
-		StringIterator it = new StringIterator( userquery, "|" );
+		var it = new StringIterator( userquery, "|" );
 		while ( it.hasNext() ) {
 			result.push_back( it.next() );
 		}
@@ -52,7 +52,7 @@ public object RenderPlugin implements IRenderPlugin {
 	}
 
 	private void PrintResult( int result ) modify {
-		string filename = mysql_get_field_value( result, "filename" );
+		var filename = mysql_get_field_value( result, "filename" );
 		if ( mResults.contains( filename ) ) {
 			return;
 		}
@@ -64,14 +64,14 @@ public object RenderPlugin implements IRenderPlugin {
 			return;
 		}
 
-		string id = mysql_get_field_value( result, "id" );
-		string actors = mysql_get_field_value( result, "actors" );
-		string md5sum = mysql_get_field_value( result, "md5sum" );
-		string rating_count = mysql_get_field_value( result, "rating_count" );
-		string rating_value = mysql_get_field_value( result, "rating_value" );
-		string tags = mysql_get_field_value( result, "tags" );
-		string title = substr( mysql_get_field_value(result , "title" ), 0, 42 );
-		string views = mysql_get_field_value( result, "views" );
+		var id = mysql_get_field_value( result, "id" );
+		var actors = mysql_get_field_value( result, "actors" );
+		var md5sum = mysql_get_field_value( result, "md5sum" );
+		var rating_count = mysql_get_field_value( result, "rating_count" );
+		var rating_value = mysql_get_field_value( result, "rating_value" );
+		var tags = mysql_get_field_value( result, "tags" );
+		var title = substr( mysql_get_field_value(result , "title" ), 0, 42 );
+		var views = mysql_get_field_value( result, "views" );
 
 		ShowVideoPreview( id, md5sum, Utils.prepareRating( cast<int>( rating_value ), cast<int>( rating_count ) ), title, views, Utils.mIsLoggedIn );
 	}
@@ -93,7 +93,7 @@ public object RenderPlugin implements IRenderPlugin {
 		Query( "SELECT actors, filename, id, md5sum, rating_count, rating_value, tags, title, views FROM items WHERE deleted = FALSE AND ( is_private = FALSE OR owner = '" + mIdentifier + "' ) AND LOWER(actors) LIKE LOWER('%" + userquery + "%') ORDER BY TITLE ASC" );
 	}
 
-	private void SearchName( string userquery ) modify {
+	private void SearchTitle( string userquery ) modify {
 		Query( "SELECT actors, filename, id, md5sum, rating_count, rating_value, tags, title, views FROM items WHERE deleted = FALSE AND ( is_private = FALSE OR owner = '" + mIdentifier + "' ) AND LOWER(title) LIKE LOWER('%" + userquery + "%') ORDER BY TITLE ASC" );
 	}
 
@@ -111,7 +111,7 @@ public object RenderPlugin implements IRenderPlugin {
 		print( "<div class='pagination3'>" );
 		print( "<ul class='firstPage'>" );
 		
-		int numPages = getNumPages();
+		var numPages = getNumPages();
 		foreach ( int pageNum : 1..numPages ) {	
 			if (
 				pageNum != 1 && pageNum != numPages			// first and last page will always be visible
