@@ -14,8 +14,8 @@ OnError: function(event) {
 OnLoad: function(event) {
 	this.pluginName = "admin";
 
-	mPlugin.mElSource = document.getElementById("source");
-	mPlugin.mElTarget = document.getElementById("target");
+	mElSource = document.getElementById( "source" );
+	mElTarget = document.getElementById( "target" );
 
 	mPlugin.OnLoadReady();
 },
@@ -39,12 +39,29 @@ OnSuccess: function(event) {
 	}
 },
 
-DownloadVideo: function() {
+DeleteDownload: function( id ) {
 	Parameters.clear();
-	Parameters.add("source", mPlugin.mElSource.value);
-	Parameters.add("target", mPlugin.mElTarget.value);
+	Parameters.add( "id", id );
 
-	execute( "downloads/downloadVideo.os", mPlugin.OnSuccess, mPlugin.OnError, mPlugin.OnAbort );
+	execute( "downloads/delete.os", mPlugin.OnSuccess, mPlugin.OnError, mPlugin.OnAbort );
+},
+
+DownloadVideo: function() {
+	var source = btoa( encodeURI( mElSource.value ) );
+	var target = btoa( mElTarget.value );
+
+	Parameters.clear();
+	Parameters.add( "source", source );
+	Parameters.add( "target", target );
+
+	execute( "downloads/download.os", mPlugin.OnSuccess, mPlugin.OnError, mPlugin.OnAbort );
+},
+
+RetryDownload: function( id ) {
+	Parameters.clear();
+	Parameters.add( "id", id );
+
+	execute( "downloads/retry.os", mPlugin.OnSuccess, mPlugin.OnError, mPlugin.OnAbort );
 }
 
 };

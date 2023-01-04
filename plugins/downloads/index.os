@@ -1,9 +1,9 @@
 #!/usr/local/bin/webscript
 
 // library imports
-import System.StringIterator;
 
 // project imports
+import libs.Database.Tables.Download;
 import libs.Plugins.RenderPlugin;
 
 
@@ -13,7 +13,10 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 	}
 
 	public void Render() {
-		pre("
+		var files = new TDownloadCollection( Database.Handle );
+		files.loadByQuery( "SELECT * FROM download ORDER BY created DESC" );
+
+		print("
 <h4>Downloads:</h4>
 
 <table style='width:100%'>
@@ -26,31 +29,28 @@ public object RenderPlugin extends ASessionPlugin implements IRenderPlugin {
 </br>
 
 <table>
-	<th>File</th>
-	<th>Size</th>
-		");
+	<tr>
+		<th>File</th>
+		<th>Created</th>
+		<th>Finished</th>
+		<th>Retry</th>
+		<th>Delete</th>
+	</tr>
+		" );
 
-		var path = "resources/downloads/"
-
-		var fileIt = new StringIterator( system( "ls -1 " + path ), LINEBREAK );
-		while ( fileIt.hasNext() ) {
-			var filename = fileIt.next();
-
-			if ( !filename ) {
-				continue;
-			}
-
-			var size = system( "du -h '" + path + filename + "' | cut -f -1" );
-
-			pre("
-<tr>
-	<td>" + filename + "</td>
-	<td>" + size + "</td>
-</tr>
-			");
+		foreach ( TDownloadRecord file : files ) {
+			print( "
+		<tr>
+			<td><a href='resources/downloads/" + file.Target + ".mp4'>" + file.Target + "</a></td>
+			<td>" + file.Created + "</td>
+			<td>" + file.Done + "</td>
+			<td onclick='mPlugin.RetryDownload( " + file.Id + " );' style='cursor: pointer;'>Retry</td>
+			<td onclick='mPlugin.DeleteDownload( " + file.Id + " );' style='cursor: pointer;'>Delete</td>
+		</tr>
+				");
 		}
 
-		pre("
+		print("
 </table>
 		");
 	}
