@@ -47,7 +47,7 @@ DeleteDownload: function( id ) {
 },
 
 DownloadVideo: function() {
-	var source = btoa( encodeURI( mElSource.value ) );
+	var source = btoa( mElSource.value );
 	var target = btoa( mElTarget.value );
 
 	Parameters.clear();

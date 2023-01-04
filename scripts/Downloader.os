@@ -19,19 +19,19 @@ public int Main( int argc, string args ) {
         return -1;
     }
     */
-	if ( !Database.connect() ) {
-		cerr( "could not connect to database!" );
-		return -2;
-	}
+    if ( !Database.connect() ) {
+        cerr( "could not connect to database!" );
+        return -2;
+    }
 
     DOWNLOADS = params[ 0 ].Key;
     print( "DOWNLOADS: " + DOWNLOADS );
 
     var collection = new TDownloadCollection( Database.Handle );
     var query = "SELECT *
-                   FROM download
-                  WHERE (done IS NULL OR done = 0)
-                  ORDER BY created";
+                    FROM download
+                    WHERE (done IS NULL OR done = 0)
+                    ORDER BY created";
 
     try {
         int count;
@@ -54,17 +54,17 @@ public int Main( int argc, string args ) {
             sleep( ( seconds >= 60 ) ? 0 : ( 60000 - seconds * 1000 ) );
         }
     }
-	catch ( string e ) {
-		print( "Exception: " + e );
-	}
-	catch ( IException e ) {
-		print( "Exception: " + e.what() );
-	}
+    catch ( string e ) {
+        print( "Exception: " + e );
+    }
+    catch ( IException e ) {
+        print( "Exception: " + e.what() );
+    }
 
-	if ( !Database.disconnect() ) {
-		cerr( "could not disconnect from database!" );
-		return -3;
-	}
+    if ( !Database.disconnect() ) {
+        cerr( "could not disconnect from database!" );
+        return -3;
+    }
 
     return 0;
 }
@@ -87,3 +87,4 @@ private void process( TDownloadRecord record ) {
     record.Done = strftime( "%Y-%m-%dT%H:%M:%S" );
     record.insertOrUpdate();
 }
+
