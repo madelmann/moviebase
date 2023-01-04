@@ -5,7 +5,7 @@ import Categories;
 import CollectionItems;
 import CollectionType;
 import Collections;
-import Downloads;
+import Download;
 import Groups;
 import Images;
 import Items;
